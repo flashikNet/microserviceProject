@@ -9,10 +9,10 @@ namespace PostApi.Controllers
         [Route("[action]")]
         [HttpGet]
         /// <summary>
-        /// Метод для получения всех постов пользователя
+        /// Get all post from user's wall
         /// </summary>
-        /// <param name="AuthorID">Айди пользователя чьи посты хочется посмотреть</param>
-        /// <returns>Список постов пользователя</returns>
+        /// <param name="AuthorID">wall owner</param>
+        /// <returns>Array of the post by author sorted by descending order of time</returns>
         /// <exception cref="NotImplementedException"></exception>
         public async Task<IActionResult> GetPostsAsync(uint AuthorID)
         {
@@ -22,11 +22,11 @@ namespace PostApi.Controllers
         [Route("[action]")]
         [HttpGet]
         /// <summary>
-        /// Получить все комментарии к посту вложенности 1
+        /// Get all the comments below the post
         /// </summary>
-        /// <param name="AuthorID">Айди автора поста</param>
-        /// <param name="PostId">Айди поста</param>
-        /// <returns>Список комментариев(постов) поста, без ответов на комментарии</returns>
+        /// <param name="AuthorID">Source post's author id</param>
+        /// <param name="PostId">Source post id</param>
+        /// <returns>Array of comments below thew post sorted by time</returns>
         /// <exception cref="NotImplementedException"></exception>
         public async Task<IActionResult> GetCommentsAsync(uint AuthorID, uint PostId) 
         {
@@ -36,11 +36,11 @@ namespace PostApi.Controllers
         [Route("[action]")]
         [HttpPost]
         /// <summary>
-        /// Метод для создания поста
+        /// Create post on the wall
         /// </summary>
-        /// <param name="AuthorId">Айди автора</param>
-        /// <param name="Text">Наполенение поста</param>
-        /// <returns>Ok 201</returns>
+        /// <param name="AuthorId">Post's author id</param>
+        /// <param name="Text">Text of the post</param>
+        /// <returns>Ok(201) - created</returns>
         /// <exception cref="NotImplementedException"></exception>
         public async Task<IActionResult> CreatePost(uint AuthorId, string Text)
         {
@@ -50,10 +50,10 @@ namespace PostApi.Controllers
         [Route("[action]")]
         [HttpGet]
         /// <summary>
-        /// Получить ленту новостей
+        /// Get posts to feed
         /// </summary>
-        /// <param name="FriendsId">Айди подписок</param>
-        /// <returns>Список постов подписок за последние три дня</returns>
+        /// <param name="FriendsId">Ids of subscriptions</param>
+        /// <returns>Array of posts for the last 3 days</returns>
         /// <exception cref="NotImplementedException"></exception>
         public async Task<IActionResult> GetFeedAsync(uint[] FriendsId)
         {

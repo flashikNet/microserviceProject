@@ -25,47 +25,57 @@ app.MapControllers();
 app.Run();
 
 /// <summary>
-/// Пост
+/// Post or comment
 /// </summary>
 public class Post
 {
     /// <summary>
-    /// Идентификатор поста считается отдельно для каждого автора
+    /// The id is individually calculated for each user's wall
     /// </summary>
     public uint Id { get; set; }
     /// <summary>
-    /// Идентификатор автора поста, вместе с ид самого поста формируют первичный ключ 
+    /// The author id with the post id form the primary key
     /// </summary>
     public uint AuthorId { get; set; }
     /// <summary>
-    /// Время создания поста
+    /// creation time
     /// </summary>
     public DateTime Time { get; set; }
     /// <summary>
-    /// Наполнение поста
+    /// Post content
     /// </summary>
     public string Text { get; set; }
     /// <summary>
-    /// Количество репостов
+    /// Number of reposts
     /// </summary>
     public uint RepostCount { get; set; }
     /// <summary>
-    /// Количество лайков
+    /// Number of likes
     /// </summary>
     public uint LikeCount { get; set; }
     /// <summary>
-    /// Количество просмотров
+    /// Number of views
     /// </summary>
     public uint ViewCount {  get; set; }
     /// <summary>
-    /// (id, authorId) ссылается на пост на который отвечает, если id == 0, значит самостоятельный пост, а не комментарий
+    /// (id, authorId) link to the parent post, if id == 0, it means an independent post, otherwise a comment
     /// </summary>
-    public (uint, uint) MotherPost {  get; set; }
+    public (uint, uint) Source {  get; set; }
     
 }
 
+/// <summary>
+/// Counter of the post on the wall
+/// </summary>
 class PostCounter
 {
+    /// <summary>
+    /// Wall owner id
+    /// </summary>
     public uint AuthorId { get; set; }
+
+    /// <summary>
+    /// Number of posts and comments on the wall
+    /// </summary>
     public uint PostCount {  get; set; }
 }
